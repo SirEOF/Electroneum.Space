@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs/ElectroneumSpace/v15
+/ElectroneumSpace/ElectroneumSpace/bin/Debug/netstandard2.0
+/ElectroneumSpace/ElectroneumSpace/obj
+/ElectroneumSpace/ElectroneumSpace.Android/obj
+/ElectroneumSpace/ElectroneumSpace.iOS/obj
+/ElectroneumSpace/ElectroneumSpace.UWP/bin/x86/Debug
+/ElectroneumSpace/ElectroneumSpace.UWP/obj

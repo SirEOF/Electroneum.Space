@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Source>C:\Users\ryand\Pictures\electroneum_logo_alpha.png</Source>
+    <SmallTileSource>C:\Users\ryand\Pictures\electroneum_logo_alpha.png</SmallTileSource>
+    <MediumTileSource>C:\Users\ryand\Pictures\electroneum_logo_alpha.png</MediumTileSource>
+    <WideTileSource>C:\Users\ryand\Pictures\electroneum_logo_alpha.png</WideTileSource>
+    <LargeTileSource>C:\Users\ryand\Pictures\electroneum_logo_alpha.png</LargeTileSource>
+    <AppIconSource>C:\Users\ryand\Pictures\electroneum_logo_alpha.png</AppIconSource>
+    <SplashScreenSource>C:\Users\ryand\Pictures\electroneum_logo_alpha.png</SplashScreenSource>
+    <PackageLogoSource>C:\Users\ryand\Pictures\electroneum_logo_alpha.png</PackageLogoSource>
+  </PropertyGroup>
+</Project>
