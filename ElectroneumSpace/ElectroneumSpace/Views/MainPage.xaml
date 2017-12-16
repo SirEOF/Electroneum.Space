@@ -2,10 +2,79 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ElectroneumSpace.Views.MainPage"
+             BackgroundColor="#272B30"
              Title="{Binding Title}">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
-    </StackLayout>
+    <Grid RowSpacing="0" ColumnSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        
+        <!-- Icons -->
+        <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="0">
+            <Button.FontFamily>
+                <OnPlatform x:TypeArguments="x:String">
+                    <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                    <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                    <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                </OnPlatform>
+            </Button.FontFamily>
+        </Button>
+
+        <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="1">
+            <Button.FontFamily>
+                <OnPlatform x:TypeArguments="x:String">
+                    <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                    <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                    <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                </OnPlatform>
+            </Button.FontFamily>
+        </Button>
+
+        <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="2">
+            <Button.FontFamily>
+                <OnPlatform x:TypeArguments="x:String">
+                    <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                    <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                    <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                </OnPlatform>
+            </Button.FontFamily>
+        </Button>
+
+        <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="3">
+            <Button.FontFamily>
+                <OnPlatform x:TypeArguments="x:String">
+                    <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                    <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                    <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                </OnPlatform>
+            </Button.FontFamily>
+        </Button>
+
+        <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="4">
+            <Button.FontFamily>
+                <OnPlatform x:TypeArguments="x:String">
+                    <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                    <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                    <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                </OnPlatform>
+            </Button.FontFamily>
+        </Button>
+
+        <!--
+        <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"
+                 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#f2f2f2" />
+        -->
+
+    </Grid>
 
 </ContentPage>
