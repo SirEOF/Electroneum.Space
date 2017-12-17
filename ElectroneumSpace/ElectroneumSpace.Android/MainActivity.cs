@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using CarouselView.FormsPlugin.Android;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 
@@ -16,7 +17,10 @@ namespace ElectroneumSpace.Droid
 
             base.OnCreate(bundle);
 
+            CarouselViewRenderer.Init();
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
             LoadApplication(new App(new AndroidInitializer()));
         }
     }

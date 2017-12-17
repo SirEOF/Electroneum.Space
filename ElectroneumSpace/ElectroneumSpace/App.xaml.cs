@@ -1,5 +1,11 @@
-﻿using ElectroneumSpace.Views;
+﻿using ElectroneumSpace.Services;
+using ElectroneumSpace.Views;
+
+using Microsoft.Practices.Unity;
+
+using Prism.Logging;
 using Prism.Unity;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -26,6 +32,7 @@ namespace ElectroneumSpace
 
         protected override void RegisterTypes()
         {
+            Container.RegisterType<ILoggerFacade, LoggerFacade>(new ContainerControlledLifetimeManager());
             Container.RegisterTypeForNavigation<MainPage>();
         }
     }
