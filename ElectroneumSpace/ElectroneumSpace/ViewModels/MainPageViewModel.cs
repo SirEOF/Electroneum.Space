@@ -14,7 +14,13 @@ namespace ElectroneumSpace.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
 
-        readonly IPoolService PoolService;
+        IPoolService _poolService;
+
+        public IPoolService PoolService
+        {
+            get => _poolService;
+            set => SetProperty(ref _poolService, value);
+        }
 
         IList<HomeSection> _homeSections;
 

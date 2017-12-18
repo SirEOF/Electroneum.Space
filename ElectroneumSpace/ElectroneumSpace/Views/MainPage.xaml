@@ -15,6 +15,32 @@
                 <ScrollView Orientation="Vertical">
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15, 15, 15, 15" Spacing="10">
 
+                        <Grid Margin="-15, -15, -15, 0" HeightRequest="50">
+                            <BoxView Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#464c53" />
+                            <Label Text="Home" TextColor="GhostWhite" Grid.Row="0" Grid.Column="0" FontSize="Medium" FontAttributes="Bold"
+                                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+
+                            <Button BackgroundColor="Transparent" BorderColor="Transparent" Text="" TextColor="GhostWhite" FontSize="Medium"
+                                    Command="{Binding BindingContext.PoolService.RefreshPoolDataCommand, Source={x:Reference MainContainer}}"
+                                    HorizontalOptions="End" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="0">
+                                <Button.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="Android">0, 5, 0, 0</On>
+                                        <On Platform="Default">0, 0, 0, 0</On>
+                                    </OnPlatform>
+                                </Button.Margin>
+                                <Button.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">FontAwesome</On>
+                                        <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                        <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                        <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                    </OnPlatform>
+                                </Button.FontFamily>
+                            </Button>
+                        </Grid>
+                        
                         <!-- Pool Stats -->
                         <Label Text="Pool Statistics" TextColor="GhostWhite" FontSize="Medium" FontAttributes="Bold"
                                HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
@@ -287,13 +313,14 @@
             </carousel:CarouselViewControl>
             
             <!-- Icons -->
-            <Label x:Name="PoolButtonLabel" Text="Pool" FontSize="10" Grid.Row="1" Grid.Column="0"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="False"
-                   VerticalTextAlignment="End" HorizontalTextAlignment="Center"
-                   Margin="0, 0, 0, 5" TextColor="GhostWhite" />
-
             <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="0" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Pool">
+                <Button.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android">0, 5, 0, 0</On>
+                        <On Platform="Default">0, 0, 0, 0</On>
+                    </OnPlatform>
+                </Button.Margin>
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="iOS">FontAwesome</On>
@@ -304,13 +331,14 @@
                 </Button.FontFamily>
             </Button>
 
-            <Label x:Name="StatsButtonLabel" Text="Stats" FontSize="10" Grid.Row="1" Grid.Column="1"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="False"
-                   VerticalTextAlignment="End" HorizontalTextAlignment="Center"
-                   Margin="0, 0, 0, 5" TextColor="GhostWhite" />
-            
             <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="1" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Stats">
+                <Button.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android">0, 5, 0, 0</On>
+                        <On Platform="Default">0, 0, 0, 0</On>
+                    </OnPlatform>
+                </Button.Margin>
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="iOS">FontAwesome</On>
@@ -321,13 +349,14 @@
                 </Button.FontFamily>
             </Button>
 
-            <Label x:Name="BlocksButtonLabel" Text="Blocks" FontSize="10" Grid.Row="1" Grid.Column="2"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="False"
-                   VerticalTextAlignment="End" HorizontalTextAlignment="Center"
-                   Margin="0, 0, 0, 5" TextColor="GhostWhite" />
-            
             <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="2" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Blocks">
+                <Button.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android">0, 5, 0, 0</On>
+                        <On Platform="Default">0, 0, 0, 0</On>
+                    </OnPlatform>
+                </Button.Margin>
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="iOS">FontAwesome</On>
@@ -338,13 +367,14 @@
                 </Button.FontFamily>
             </Button>
 
-            <Label x:Name="DonateButtonLabel" Text="Donate" FontSize="10" Grid.Row="1" Grid.Column="3"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="False"
-                   VerticalTextAlignment="End" HorizontalTextAlignment="Center"
-                   Margin="0, 0, 0, 5" TextColor="GhostWhite" />
-            
             <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="3" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Donate">
+                <Button.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android">0, 5, 0, 0</On>
+                        <On Platform="Default">0, 0, 0, 0</On>
+                    </OnPlatform>
+                </Button.Margin>
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="iOS">FontAwesome</On>
@@ -355,13 +385,14 @@
                 </Button.FontFamily>
             </Button>
 
-            <Label x:Name="SettingsButtonLabel" Text="Settings" FontSize="10" Grid.Row="1" Grid.Column="4"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="False"
-                   VerticalTextAlignment="End" HorizontalTextAlignment="Center"
-                   Margin="0, 0, 0, 5" TextColor="GhostWhite" />
-            
             <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="4" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Settings">
+                <Button.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android">0, 5, 0, 0</On>
+                        <On Platform="Default">0, 0, 0, 0</On>
+                    </OnPlatform>
+                </Button.Margin>
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="iOS">FontAwesome</On>
