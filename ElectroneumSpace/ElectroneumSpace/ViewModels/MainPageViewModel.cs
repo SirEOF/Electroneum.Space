@@ -40,6 +40,14 @@ namespace ElectroneumSpace.ViewModels
             set => SetProperty(ref _swapHomeSectionCommand, value);
         }
 
+        DelegateCommand _displaySettingsCommand;
+
+        public DelegateCommand DisplaySettingsCommand
+        {
+            get => _displaySettingsCommand;
+            set => SetProperty(ref _displaySettingsCommand, value);
+        }
+
         public MainPageViewModel(INavigationService navigationService, ILoggerFacade loggerFacade,
             IPoolService poolService) : base(navigationService, loggerFacade)
         {
@@ -56,6 +64,13 @@ namespace ElectroneumSpace.ViewModels
             HomeSections = new List<HomeSection>(Enum.GetValues(typeof(HomeSection)).Cast<HomeSection>());
 
             SwapHomeSectionCommand = new DelegateCommand<string>(HandleHomeSectionSwapRequest);
+            DisplaySettingsCommand = new DelegateCommand(HandleDisplaySettingsRequest);
+        }
+
+        void HandleDisplaySettingsRequest()
+        {
+            // 4 is the index for settings
+            CurrentSectionPosition = 4;
         }
 
         void HandleHomeSectionSwapRequest(string obj)

@@ -20,7 +20,7 @@ namespace ElectroneumSpace.Services
 
     public interface IPoolService
     {
-
+        string NetworkAddress { get; }
     }
 
     public class PoolService : BindableBase, IPoolService
@@ -38,6 +38,14 @@ namespace ElectroneumSpace.Services
         {
             get => _poolStatistics;
             set => SetProperty(ref _poolStatistics, value);
+        }
+
+        string _networkAddress;
+
+        public string NetworkAddress
+        {
+            get => _networkAddress;
+            set => SetProperty(ref _networkAddress, value);
         }
 
         public PoolService(ILoggerFacade loggerFacade, IPageDialogService pageDialogService)
