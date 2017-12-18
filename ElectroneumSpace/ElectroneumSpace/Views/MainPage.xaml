@@ -11,10 +11,102 @@
         <ResourceDictionary>
 
             <DataTemplate x:Key="PoolTemplate">
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Green">
-                    <Label Text="Pool" TextColor="White"
-                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15, 15, 15, 15" Spacing="10">
+
+                    <Label Text="Pool Statistics" TextColor="GhostWhite" FontSize="Medium" FontAttributes="Bold"
+                           HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+
+                    <!-- Pool Hash Rate -->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                    <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                    <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="Hash Rate:" TextColor="GhostWhite" FontSize="Small" />
+                        <Label Text="41.14 MH/sec" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                    </StackLayout>
+
+                    <!-- Block Found -->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                    <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                    <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="Block Found:" TextColor="GhostWhite" FontSize="Small" />
+                        <Label Text="2 minutes ago" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                    </StackLayout>
+
+                    <!-- Connected Miners -->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                    <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                    <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="Connected Miners:" TextColor="GhostWhite" FontSize="Small" />
+                        <Label Text="6858" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                    </StackLayout>
+
+                    <!-- Donations -->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                    <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                    <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="Donations:" TextColor="GhostWhite" FontSize="Small" />
+                        <Label Text="None" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                    </StackLayout>
+
+                    <!-- Pool Fee -->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                    <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                    <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="Total Pool Fee:" TextColor="GhostWhite" FontSize="Small" />
+                        <Label Text="0.1%" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                    </StackLayout>
+
+                    <!-- Pool Fee -->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                    <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                    <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="Block Found Every:" TextColor="GhostWhite" FontSize="Small" />
+                        <Label Text="7 minutes" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                        <Label Text="(est.)" TextColor="GhostWhite" FontSize="Small" />
+                    </StackLayout>
+
                 </StackLayout>
             </DataTemplate>
 
@@ -65,7 +157,7 @@
         <Grid RowSpacing="0" ColumnSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -76,13 +168,19 @@
             </Grid.ColumnDefinitions>
 
             <!-- Carousel -->
-            <carousel:CarouselViewControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"
+            <carousel:CarouselViewControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Position="{Binding CurrentSectionPosition}"
                                           ItemsSource="{Binding HomeSections}" ItemTemplate="{StaticResource HomeSectionSelector}"
                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
             </carousel:CarouselViewControl>
             
             <!-- Icons -->
-            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="0" FontSize="Medium" BackgroundColor="Transparent">
+            <Label Text="Pool" FontSize="10" Grid.Row="1" Grid.Column="0"
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                   VerticalTextAlignment="End" HorizontalTextAlignment="Center"
+                   Margin="0, 0, 0, 5" TextColor="GhostWhite" />
+            
+            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="0" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
+                    Command="{Binding SwapHomeSectionCommand}" CommandParameter="Pool">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
@@ -92,7 +190,13 @@
                 </Button.FontFamily>
             </Button>
 
-            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="1" FontSize="Medium" BackgroundColor="Transparent">
+            <Label Text="Stats" FontSize="10" Grid.Row="1" Grid.Column="1"
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                   VerticalTextAlignment="End" HorizontalTextAlignment="Center"
+                   Margin="0, 0, 0, 5" TextColor="GhostWhite" />
+            
+            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="1" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
+                    Command="{Binding SwapHomeSectionCommand}" CommandParameter="Stats">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
@@ -102,7 +206,13 @@
                 </Button.FontFamily>
             </Button>
 
-            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="2" FontSize="Medium" BackgroundColor="Transparent">
+            <Label Text="Blocks" FontSize="10" Grid.Row="1" Grid.Column="2"
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                   VerticalTextAlignment="End" HorizontalTextAlignment="Center"
+                   Margin="0, 0, 0, 5" TextColor="GhostWhite" />
+            
+            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="2" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
+                    Command="{Binding SwapHomeSectionCommand}" CommandParameter="Blocks">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
@@ -112,7 +222,13 @@
                 </Button.FontFamily>
             </Button>
 
-            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="3" FontSize="Medium" BackgroundColor="Transparent">
+            <Label Text="Donate" FontSize="10" Grid.Row="1" Grid.Column="3"
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                   VerticalTextAlignment="End" HorizontalTextAlignment="Center"
+                   Margin="0, 0, 0, 5" TextColor="GhostWhite" />
+            
+            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="3" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
+                    Command="{Binding SwapHomeSectionCommand}" CommandParameter="Donate">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
@@ -122,7 +238,13 @@
                 </Button.FontFamily>
             </Button>
 
-            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="4" FontSize="Medium" BackgroundColor="Transparent">
+            <Label Text="Settings" FontSize="10" Grid.Row="1" Grid.Column="4"
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                   VerticalTextAlignment="End" HorizontalTextAlignment="Center"
+                   Margin="0, 0, 0, 5" TextColor="GhostWhite" />
+            
+            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="4" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
+                    Command="{Binding SwapHomeSectionCommand}" CommandParameter="Settings">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>

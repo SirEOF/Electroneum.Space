@@ -6598,6 +6598,9 @@ namespace ElectroneumSpace.Droid
 			// aapt resource value: 0x7f0b018d
 			public const int MainTheme_Base = 2131427725;
 			
+			// aapt resource value: 0x7f0b018f
+			public const int NoShadowButton = 2131427727;
+			
 			// aapt resource value: 0x7f0b002d
 			public const int Platform_AppCompat = 2131427373;
 			
