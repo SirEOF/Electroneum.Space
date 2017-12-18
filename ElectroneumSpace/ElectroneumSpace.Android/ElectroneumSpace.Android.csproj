@@ -59,6 +59,9 @@
     <PackageReference Include="CarouselView.FormsPlugin">
       <Version>5.0.2</Version>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>10.0.3</Version>
+    </PackageReference>
     <PackageReference Include="refit">
       <Version>4.0.1</Version>
     </PackageReference>

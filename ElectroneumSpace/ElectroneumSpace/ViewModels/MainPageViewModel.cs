@@ -5,11 +5,14 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Prism.Logging;
+using ElectroneumSpace.Services;
 
 namespace ElectroneumSpace.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+
+        readonly IPoolService PoolService;
 
         IList<HomeSection> _homeSections;
 
@@ -19,8 +22,10 @@ namespace ElectroneumSpace.ViewModels
             set => SetProperty(ref _homeSections, value);
         }
 
-        public MainPageViewModel(INavigationService navigationService, ILoggerFacade loggerFacade) : base(navigationService, loggerFacade)
+        public MainPageViewModel(INavigationService navigationService, ILoggerFacade loggerFacade,
+            IPoolService poolService) : base(navigationService, loggerFacade)
         {
+            PoolService = poolService;
             SetupViewModel();
         }
 

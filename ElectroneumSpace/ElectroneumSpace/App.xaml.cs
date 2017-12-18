@@ -33,6 +33,8 @@ namespace ElectroneumSpace
         protected override void RegisterTypes()
         {
             Container.RegisterType<ILoggerFacade, LoggerFacade>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IPoolService, PoolService>(new ContainerControlledLifetimeManager());
+
             Container.RegisterTypeForNavigation<MainPage>();
         }
     }
