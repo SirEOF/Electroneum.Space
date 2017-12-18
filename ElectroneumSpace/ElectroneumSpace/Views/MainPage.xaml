@@ -258,27 +258,48 @@
             </DataTemplate>
 
             <DataTemplate x:Key="BlocksTemplate">
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Green">
-                    <Label Text="Blocks" TextColor="White"
-                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                </StackLayout>
+                <ScrollView Orientation="Vertical">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15, 15, 15, 15" Spacing="10">
+
+                        <Grid Margin="-15, -15, -15, 0" HeightRequest="50">
+                            <BoxView Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#464c53" />
+                            <Label Text="Blocks" TextColor="GhostWhite" Grid.Row="0" Grid.Column="0" FontSize="Medium" FontAttributes="Bold"
+                                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                        </Grid>
+
+                    </StackLayout>
+                </ScrollView>
             </DataTemplate>
 
             <DataTemplate x:Key="DonateTemplate">
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Green">
-                    <Label Text="Donate" TextColor="White"
-                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                </StackLayout>
+                <ScrollView Orientation="Vertical">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15, 15, 15, 15" Spacing="10">
+
+                        <Grid Margin="-15, -15, -15, 0" HeightRequest="50">
+                            <BoxView Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#464c53" />
+                            <Label Text="Donate" TextColor="GhostWhite" Grid.Row="0" Grid.Column="0" FontSize="Medium" FontAttributes="Bold"
+                                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                        </Grid>
+
+                    </StackLayout>
+                </ScrollView>
             </DataTemplate>
 
             <DataTemplate x:Key="SettingsTemplate">
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Green">
-                    <Label Text="Settings" TextColor="White"
-                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                </StackLayout>
+                <ScrollView Orientation="Vertical">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15, 15, 15, 15" Spacing="10">
+
+                        <Grid Margin="-15, -15, -15, 0" HeightRequest="50">
+                            <BoxView Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#464c53" />
+                            <Label Text="Settings" TextColor="GhostWhite" Grid.Row="0" Grid.Column="0" FontSize="Medium" FontAttributes="Bold"
+                                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                        </Grid>
+
+                    </StackLayout>
+                </ScrollView>
             </DataTemplate>
 
             <selectors:HomeSectionSelector x:Key="HomeSectionSelector"
