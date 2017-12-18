@@ -21,6 +21,7 @@
                         <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">FontAwesome</On>
                                     <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
                                     <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
                                     <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
@@ -36,6 +37,7 @@
                         <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">FontAwesome</On>
                                     <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
                                     <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
                                     <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
@@ -51,6 +53,7 @@
                         <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">FontAwesome</On>
                                     <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
                                     <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
                                     <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
@@ -66,6 +69,7 @@
                         <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">FontAwesome</On>
                                     <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
                                     <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
                                     <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
@@ -81,6 +85,7 @@
                         <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">FontAwesome</On>
                                     <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
                                     <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
                                     <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
@@ -96,6 +101,7 @@
                         <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">FontAwesome</On>
                                     <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
                                     <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
                                     <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
@@ -174,15 +180,16 @@
             </carousel:CarouselViewControl>
             
             <!-- Icons -->
-            <Label Text="Pool" FontSize="10" Grid.Row="1" Grid.Column="0"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+            <Label x:Name="PoolButtonLabel" Text="Pool" FontSize="10" Grid.Row="1" Grid.Column="0"
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="False"
                    VerticalTextAlignment="End" HorizontalTextAlignment="Center"
                    Margin="0, 0, 0, 5" TextColor="GhostWhite" />
-            
+
             <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="0" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Pool">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">FontAwesome</On>
                         <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
                         <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
                         <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
@@ -190,8 +197,8 @@
                 </Button.FontFamily>
             </Button>
 
-            <Label Text="Stats" FontSize="10" Grid.Row="1" Grid.Column="1"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+            <Label x:Name="StatsButtonLabel" Text="Stats" FontSize="10" Grid.Row="1" Grid.Column="1"
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="False"
                    VerticalTextAlignment="End" HorizontalTextAlignment="Center"
                    Margin="0, 0, 0, 5" TextColor="GhostWhite" />
             
@@ -199,6 +206,7 @@
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Stats">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">FontAwesome</On>
                         <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
                         <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
                         <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
@@ -206,8 +214,8 @@
                 </Button.FontFamily>
             </Button>
 
-            <Label Text="Blocks" FontSize="10" Grid.Row="1" Grid.Column="2"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+            <Label x:Name="BlocksButtonLabel" Text="Blocks" FontSize="10" Grid.Row="1" Grid.Column="2"
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="False"
                    VerticalTextAlignment="End" HorizontalTextAlignment="Center"
                    Margin="0, 0, 0, 5" TextColor="GhostWhite" />
             
@@ -215,6 +223,7 @@
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Blocks">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">FontAwesome</On>
                         <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
                         <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
                         <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
@@ -222,8 +231,8 @@
                 </Button.FontFamily>
             </Button>
 
-            <Label Text="Donate" FontSize="10" Grid.Row="1" Grid.Column="3"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+            <Label x:Name="DonateButtonLabel" Text="Donate" FontSize="10" Grid.Row="1" Grid.Column="3"
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="False"
                    VerticalTextAlignment="End" HorizontalTextAlignment="Center"
                    Margin="0, 0, 0, 5" TextColor="GhostWhite" />
             
@@ -231,6 +240,7 @@
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Donate">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">FontAwesome</On>
                         <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
                         <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
                         <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
@@ -238,8 +248,8 @@
                 </Button.FontFamily>
             </Button>
 
-            <Label Text="Settings" FontSize="10" Grid.Row="1" Grid.Column="4"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+            <Label x:Name="SettingsButtonLabel" Text="Settings" FontSize="10" Grid.Row="1" Grid.Column="4"
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="False"
                    VerticalTextAlignment="End" HorizontalTextAlignment="Center"
                    Margin="0, 0, 0, 5" TextColor="GhostWhite" />
             
@@ -247,6 +257,7 @@
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Settings">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">FontAwesome</On>
                         <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
                         <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
                         <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
