@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.0.2" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.6.8" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="refit" Version="4.0.1" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="4.0.0.171-beta" />

@@ -124,8 +124,17 @@ namespace ElectroneumSpace.Services
         #endregion
 
         #region Network Metrics
+
+        string _networkHashRate = "0.00";
+
+        public string NetworkHashRate
+        {
+            get => _networkHashRate;
+            set => SetProperty(ref _networkHashRate, value);
+        }
+
         #endregion
-        
+
         public PoolService(ILoggerFacade loggerFacade, IPageDialogService pageDialogService)
         {
             LoggerFacade = loggerFacade;
@@ -171,6 +180,9 @@ namespace ElectroneumSpace.Services
 
                 var stats = await PoolApi.GetPoolStatisticsAsync().ConfigureAwait(true);
 
+                // Some stats are wrong or not included, for this we parse the webpage
+                // http://www.electroneum.space/
+
                 if (stats == null)
                     return false;
 
@@ -195,6 +207,19 @@ namespace ElectroneumSpace.Services
             {
                 IsRefreshing = false;
             }
+        }
+
+        void SetNetworkHashRate(string hash)
+        {
+            // Log
+            LoggerFacade.Log("Setting network hashrate.", Category.Debug, Priority.Low);
+
+            // Calculate
+            //var toMh = hash / 1000000;
+            //var toStr = toMh.ToString("F");
+
+            // Set
+            //PoolHashRate = toStr;
         }
 
         void SetPoolBlockEstimate(string[] blocks)
