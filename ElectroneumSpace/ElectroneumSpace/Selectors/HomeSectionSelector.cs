@@ -13,7 +13,7 @@ namespace ElectroneumSpace.Selectors
 
         public DataTemplate BlocksTemplate { get; set; }
 
-        public DataTemplate DonateTemplate { get; set; }
+        public DataTemplate SupportTemplate { get; set; }
 
         public DataTemplate SettingsTemplate { get; set; }
 
@@ -32,8 +32,8 @@ namespace ElectroneumSpace.Selectors
                     case HomeSection.Blocks:
                         return BlocksTemplate;
 
-                    case HomeSection.Donate:
-                        return DonateTemplate;
+                    case HomeSection.Support:
+                        return SupportTemplate;
 
                     case HomeSection.Settings:
                         return SettingsTemplate;

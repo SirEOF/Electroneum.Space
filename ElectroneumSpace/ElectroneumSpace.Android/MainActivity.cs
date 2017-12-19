@@ -16,7 +16,7 @@ namespace ElectroneumSpace.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-
+            
             CarouselViewRenderer.Init();
 
             global::Xamarin.Forms.Forms.Init(this, bundle);

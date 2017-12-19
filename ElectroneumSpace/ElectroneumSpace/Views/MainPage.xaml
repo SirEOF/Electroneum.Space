@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:converters="clr-namespace:ElectroneumSpace.Converters"
              xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             xmlns:effects="clr-namespace:ElectroneumSpace.Effects"
              xmlns:selectors="clr-namespace:ElectroneumSpace.Selectors"
              x:Class="ElectroneumSpace.Views.MainPage"
              BackgroundColor="#272B30"
@@ -15,32 +17,6 @@
                 <ScrollView Orientation="Vertical">
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15, 15, 15, 15" Spacing="10">
 
-                        <Grid Margin="-15, -15, -15, 0" HeightRequest="50">
-                            <BoxView Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#464c53" />
-                            <Label Text="Home" TextColor="GhostWhite" Grid.Row="0" Grid.Column="0" FontSize="Medium" FontAttributes="Bold"
-                                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-
-                            <Button BackgroundColor="Transparent" BorderColor="Transparent" Text="" TextColor="GhostWhite" FontSize="Medium"
-                                    Command="{Binding BindingContext.PoolService.RefreshPoolDataCommand, Source={x:Reference MainContainer}}"
-                                    HorizontalOptions="End" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="0">
-                                <Button.Margin>
-                                    <OnPlatform x:TypeArguments="Thickness">
-                                        <On Platform="Android">0, 5, 0, 0</On>
-                                        <On Platform="Default">0, 0, 0, 0</On>
-                                    </OnPlatform>
-                                </Button.Margin>
-                                <Button.FontFamily>
-                                    <OnPlatform x:TypeArguments="x:String">
-                                        <On Platform="iOS">FontAwesome</On>
-                                        <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
-                                        <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
-                                        <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
-                                    </OnPlatform>
-                                </Button.FontFamily>
-                            </Button>
-                        </Grid>
-                        
                         <!-- Pool Stats -->
                         <Label Text="Pool Statistics" TextColor="GhostWhite" FontSize="Medium" FontAttributes="Bold"
                                HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
@@ -60,7 +36,8 @@
                                 </Label.FontFamily>
                             </Label>
                             <Label Text="Hash Rate:" TextColor="GhostWhite" FontSize="Small" />
-                            <Label Text="41.14 MH/sec" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                            <Label Text="{Binding BindingContext.PoolService.PoolHashRate, Source={x:Reference MainContainer}, StringFormat='{0} MH/sec'}"
+                                   TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
                         </StackLayout>
 
                         <!-- Block Found -->
@@ -76,7 +53,8 @@
                                 </Label.FontFamily>
                             </Label>
                             <Label Text="Block Found:" TextColor="GhostWhite" FontSize="Small" />
-                            <Label Text="2 minutes ago" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                            <Label Text="{Binding BindingContext.PoolService.PoolLastBlockFound, Source={x:Reference MainContainer}, StringFormat='{0} minute/s ago'}"
+                                   TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
                         </StackLayout>
 
                         <!-- Connected Miners -->
@@ -92,7 +70,8 @@
                                 </Label.FontFamily>
                             </Label>
                             <Label Text="Connected Miners:" TextColor="GhostWhite" FontSize="Small" />
-                            <Label Text="6858" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                            <Label Text="{Binding BindingContext.PoolService.PoolConnectedMiners, Source={x:Reference MainContainer}}"
+                                   TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
                         </StackLayout>
 
                         <!-- Donations -->
@@ -124,10 +103,11 @@
                                 </Label.FontFamily>
                             </Label>
                             <Label Text="Total Pool Fee:" TextColor="GhostWhite" FontSize="Small" />
-                            <Label Text="0.1%" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                            <Label Text="{Binding BindingContext.PoolService.PoolTotalFee, Source={x:Reference MainContainer}}"
+                                   TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
                         </StackLayout>
 
-                        <!-- Pool Fee -->
+                        <!-- Pool Block Est -->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                             <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                                 <Label.FontFamily>
@@ -140,7 +120,8 @@
                                 </Label.FontFamily>
                             </Label>
                             <Label Text="Block Found Every:" TextColor="GhostWhite" FontSize="Small" />
-                            <Label Text="7 minutes" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                            <Label Text="{Binding BindingContext.PoolService.PoolAverageBlockInterval, Source={x:Reference MainContainer}, StringFormat='{0} minutes '}"
+                                   TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
                             <Label Text="(est.)" TextColor="GhostWhite" FontSize="Small" />
                         </StackLayout>
 
@@ -261,28 +242,168 @@
                 <ScrollView Orientation="Vertical">
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15, 15, 15, 15" Spacing="10">
 
-                        <Grid Margin="-15, -15, -15, 0" HeightRequest="50">
-                            <BoxView Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#464c53" />
-                            <Label Text="Blocks" TextColor="GhostWhite" Grid.Row="0" Grid.Column="0" FontSize="Medium" FontAttributes="Bold"
-                                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-                        </Grid>
-
                     </StackLayout>
                 </ScrollView>
             </DataTemplate>
 
-            <DataTemplate x:Key="DonateTemplate">
+            <DataTemplate x:Key="SupportTemplate">
                 <ScrollView Orientation="Vertical">
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15, 15, 15, 15" Spacing="10">
 
-                        <Grid Margin="-15, -15, -15, 0" HeightRequest="50">
-                            <BoxView Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#464c53" />
-                            <Label Text="Donate" TextColor="GhostWhite" Grid.Row="0" Grid.Column="0" FontSize="Medium" FontAttributes="Bold"
-                                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-                        </Grid>
+                        <!-- Donate card -->
+                        <Frame x:Name="DonationCard" BackgroundColor="GhostWhite">
+                            <StackLayout>
 
+                                <!-- Header -->
+                                <Label Text="Donation Address" TextColor="#2f2f2f" FontSize="Small" FontAttributes="Bold"
+                                       HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                
+                                <!-- Address -->
+                                <Entry x:Name="DonationAddressEntry" BackgroundColor="#272B30" TextColor="GhostWhite" FontSize="Micro"
+                                       Text="{Binding BindingContext.DonationAddress, Source={x:Reference MainContainer}}">
+                                    <Entry.Behaviors>
+                                        <b:EventToCommandBehavior EventName="TextChanged"
+                                                                  Command="{Binding BindingContext.DonationAddressChangeCommand, Source={x:Reference MainContainer}}"
+                                                                  CommandParameter="{x:Reference DonationAddressEntry}" />
+                                    </Entry.Behaviors>
+                                    <Entry.Effects>
+                                        <effects:ControlRemoveBackgroundEffect />
+                                    </Entry.Effects>
+                                </Entry>
+                                
+                                <!-- Footer -->
+                                <Label Text="Thank you to all donators. If you want your name on this page, then DM Rad on the official discord server with your payment ID."
+                                       TextColor="#2f2f2f" FontSize="Micro" FontAttributes="Italic"
+                                       HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                
+                            </StackLayout>
+                        </Frame>
+                        
+                        <!-- Roadmap card -->
+                        <Frame x:Name="RoadmapCard" BackgroundColor="GhostWhite">
+                            <StackLayout>
+
+                                <!-- Header -->
+                                <Label Text="App Roadmap" TextColor="#2f2f2f" FontSize="Small" FontAttributes="Bold"
+                                       HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                                <!-- Grid -->
+                                <Grid BackgroundColor="#272B30" RowSpacing="1" ColumnSpacing="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="" TextColor="#272B30" Grid.Row="0" Grid.Column="0" FontSize="Medium" BackgroundColor="GhostWhite"
+                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                        <Button.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <On Platform="iOS">FontAwesome</On>
+                                                <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                                <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                                <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                            </OnPlatform>
+                                        </Button.FontFamily>
+                                    </Label>
+
+                                    <Label Text="" TextColor="#272B30" Grid.Row="1" Grid.Column="0" FontSize="Medium" BackgroundColor="GhostWhite"
+                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                        <Button.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <On Platform="iOS">FontAwesome</On>
+                                                <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                                <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                                <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                            </OnPlatform>
+                                        </Button.FontFamily>
+                                    </Label>
+
+                                    <Label Text="" TextColor="#272B30" Grid.Row="2" Grid.Column="0" FontSize="Medium" BackgroundColor="GhostWhite"
+                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                        <Button.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <On Platform="iOS">FontAwesome</On>
+                                                <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                                <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                                <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                            </OnPlatform>
+                                        </Button.FontFamily>
+                                    </Label>
+
+                                    <Label Text="" TextColor="#272B30" Grid.Row="3" Grid.Column="0" FontSize="Medium" BackgroundColor="GhostWhite"
+                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                        <Button.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <On Platform="iOS">FontAwesome</On>
+                                                <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                                <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                                <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                            </OnPlatform>
+                                        </Button.FontFamily>
+                                    </Label>
+
+                                    <Label Text="" TextColor="#272B30" Grid.Row="4" Grid.Column="0" FontSize="Medium" BackgroundColor="GhostWhite"
+                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                        <Button.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <On Platform="iOS">FontAwesome</On>
+                                                <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                                <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                                <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                            </OnPlatform>
+                                        </Button.FontFamily>
+                                    </Label>
+
+                                    <Label Text=" Android Release" Grid.Row="0" Grid.Column="1"
+                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                                           BackgroundColor="GhostWhite" TextColor="#272B30" />
+
+                                    <Label Text=" Windows Release" Grid.Row="1" Grid.Column="1"
+                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                                           BackgroundColor="GhostWhite" TextColor="#272B30" />
+
+                                    <Label Text=" iOS Release" Grid.Row="2" Grid.Column="1"
+                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                                           BackgroundColor="GhostWhite" TextColor="#272B30" />
+
+                                    <Label Text=" Multiple Wallet Addresses" Grid.Row="3" Grid.Column="1"
+                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                                           BackgroundColor="GhostWhite" TextColor="#272B30" />
+
+                                    <Label Text=" Payout Notifications" Grid.Row="4" Grid.Column="1"
+                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                                           BackgroundColor="GhostWhite" TextColor="#272B30" />
+                                </Grid>
+                                
+                                <!-- Footer -->
+                                <Label Text="If you have any more ideas for the app, then DM Rad on the official discord server."
+                                       TextColor="#2f2f2f" FontSize="Micro" FontAttributes="Italic"
+                                       HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                
+                            </StackLayout>
+                        </Frame>
+                        
                     </StackLayout>
                 </ScrollView>
             </DataTemplate>
@@ -290,13 +411,6 @@
             <DataTemplate x:Key="SettingsTemplate">
                 <ScrollView Orientation="Vertical">
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15, 15, 15, 15" Spacing="10">
-
-                        <Grid Margin="-15, -15, -15, 0" HeightRequest="50">
-                            <BoxView Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#464c53" />
-                            <Label Text="Settings" TextColor="GhostWhite" Grid.Row="0" Grid.Column="0" FontSize="Medium" FontAttributes="Bold"
-                                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-                        </Grid>
 
                     </StackLayout>
                 </ScrollView>
@@ -306,8 +420,10 @@
                                            PoolTemplate="{StaticResource PoolTemplate}"
                                            StatsTemplate="{StaticResource StatsTemplate}"
                                            BlocksTemplate="{StaticResource BlocksTemplate}"
-                                           DonateTemplate="{StaticResource DonateTemplate}"
+                                           SupportTemplate="{StaticResource SupportTemplate}"
                                            SettingsTemplate="{StaticResource SettingsTemplate}" />
+
+            <converters:HomeSectionConverter x:Key="HomeSectionConverter" />
 
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -316,6 +432,7 @@
 
         <Grid x:Name="MainContainer" RowSpacing="0" ColumnSpacing="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -327,14 +444,46 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <!-- Header -->
+            <BoxView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" BackgroundColor="Gray"
+                     HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+
+            <Label Text="{Binding CurrentSectionPosition, Converter={StaticResource HomeSectionConverter}}"
+                   TextColor="GhostWhite" BackgroundColor="Transparent" FontSize="Medium" FontAttributes="Bold"
+                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"
+                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+            <!-- Tooltip Icons -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"
+                         Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
+                <Button Text="" TextColor="GhostWhite" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
+                        Command="{Binding BindingContext.PoolService.RefreshPoolDataCommand, Source={x:Reference MainContainer}}">
+                    <Button.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android">0, 5, 0, 0</On>
+                            <On Platform="Default">0, 0, 0, 0</On>
+                        </OnPlatform>
+                    </Button.Margin>
+                    <Button.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS">FontAwesome</On>
+                            <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                            <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                            <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                        </OnPlatform>
+                    </Button.FontFamily>
+                </Button>
+            </StackLayout>
+            
             <!-- Carousel -->
-            <carousel:CarouselViewControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Position="{Binding CurrentSectionPosition}"
+            <carousel:CarouselViewControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Position="{Binding CurrentSectionPosition}"
                                           ItemsSource="{Binding HomeSections}" ItemTemplate="{StaticResource HomeSectionSelector}"
                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
             </carousel:CarouselViewControl>
             
             <!-- Icons -->
-            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="0" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
+            <Button Text="" TextColor="GhostWhite" Grid.Row="2" Grid.Column="0" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Pool">
                 <Button.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
@@ -352,7 +501,7 @@
                 </Button.FontFamily>
             </Button>
 
-            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="1" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
+            <Button Text="" TextColor="GhostWhite" Grid.Row="2" Grid.Column="1" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Stats">
                 <Button.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
@@ -370,7 +519,7 @@
                 </Button.FontFamily>
             </Button>
 
-            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="2" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
+            <Button Text="" TextColor="GhostWhite" Grid.Row="2" Grid.Column="2" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Blocks">
                 <Button.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
@@ -388,8 +537,8 @@
                 </Button.FontFamily>
             </Button>
 
-            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="3" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
-                    Command="{Binding SwapHomeSectionCommand}" CommandParameter="Donate">
+            <Button Text="" TextColor="GhostWhite" Grid.Row="2" Grid.Column="3" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
+                    Command="{Binding SwapHomeSectionCommand}" CommandParameter="Support">
                 <Button.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
                         <On Platform="Android">0, 5, 0, 0</On>
@@ -406,7 +555,7 @@
                 </Button.FontFamily>
             </Button>
 
-            <Button Text="" TextColor="White" Grid.Row="1" Grid.Column="4" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
+            <Button Text="" TextColor="GhostWhite" Grid.Row="2" Grid.Column="4" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
                     Command="{Binding SwapHomeSectionCommand}" CommandParameter="Settings">
                 <Button.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
@@ -424,7 +573,7 @@
                 </Button.FontFamily>
             </Button>
 
-            <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" HeightRequest="1"
+            <BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" HeightRequest="1"
                  HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="#f2f2f2" />
 
         </Grid>

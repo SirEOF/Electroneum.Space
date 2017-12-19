@@ -8,6 +8,7 @@ using Prism.Logging;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Xamarin.Forms;
 
 namespace ElectroneumSpace.ViewModels
 {
@@ -54,6 +55,26 @@ namespace ElectroneumSpace.ViewModels
             set => SetProperty(ref _displaySettingsCommand, value);
         }
 
+        #region Support Properties
+
+        string _donationAddress = PoolConstants.DonationAddress;
+
+        public string DonationAddress
+        {
+            get => _donationAddress;
+            set => SetProperty(ref _donationAddress, value);
+        }
+
+        DelegateCommand<Entry> _donationAddressChangeCommand;
+
+        public DelegateCommand<Entry> DonationAddressChangeCommand
+        {
+            get => _donationAddressChangeCommand;
+            set => SetProperty(ref _donationAddressChangeCommand, value);
+        }
+
+        #endregion
+
         public MainPageViewModel(INavigationService navigationService, ILoggerFacade loggerFacade,
             IPoolService poolService) : base(navigationService, loggerFacade)
         {
@@ -71,6 +92,19 @@ namespace ElectroneumSpace.ViewModels
 
             SwapHomeSectionCommand = new DelegateCommand<string>(HandleHomeSectionSwapRequest);
             DisplaySettingsCommand = new DelegateCommand(HandleDisplaySettingsRequest);
+            DonationAddressChangeCommand = new DelegateCommand<Entry>(HandleDonationAddressChange);
+        }
+
+        /// <summary>
+        /// Block modification
+        /// </summary>
+        /// <param name="sender"></param>
+        void HandleDonationAddressChange(Entry sender)
+        {
+            if (sender.Text.Equals(PoolConstants.DonationAddress))
+                return;
+
+            sender.Text = PoolConstants.DonationAddress;
         }
 
         void HandleDisplaySettingsRequest()
@@ -96,7 +130,7 @@ namespace ElectroneumSpace.ViewModels
                     CurrentSectionPosition = 2;
                     break;
 
-                case nameof(HomeSection.Donate):
+                case nameof(HomeSection.Support):
                     CurrentSectionPosition = 3;
                     break;
 
