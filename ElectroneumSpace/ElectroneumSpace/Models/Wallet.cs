@@ -1,11 +1,16 @@
-﻿namespace ElectroneumSpace.Models
+﻿using Realms;
+using System;
+
+namespace ElectroneumSpace.Models
 {
-    public class Wallet
+    public class Wallet : RealmObject
     {
 
-        public string WalletNickname { get; set; }
+        public string Nickname { get; set; }
 
-        public string WalletAddress { get; set; }
+        public string Address { get; set; }
+
+        public DateTimeOffset Created { get; set; }
 
     }
 }

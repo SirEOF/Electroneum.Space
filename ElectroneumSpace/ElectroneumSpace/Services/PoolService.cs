@@ -127,7 +127,7 @@ namespace ElectroneumSpace.Services
 
         #region Network Metrics
 
-        string _networkHashRate = "0.00";
+        string _networkHashRate = string.Empty;
 
         public string NetworkHashRate
         {
@@ -135,7 +135,7 @@ namespace ElectroneumSpace.Services
             set => SetProperty(ref _networkHashRate, value);
         }
 
-        string _networkLastBlockFound = "";
+        string _networkLastBlockFound = string.Empty;
 
         public string NetworkLastBlockFound
         {
@@ -143,7 +143,7 @@ namespace ElectroneumSpace.Services
             set => SetProperty(ref _networkLastBlockFound, value);
         }
 
-        string _networkDifficulty = "";
+        string _networkDifficulty = string.Empty;
 
         public string NetworkDifficulty
         {
@@ -151,7 +151,7 @@ namespace ElectroneumSpace.Services
             set => SetProperty(ref _networkDifficulty, value);
         }
 
-        string _blockchainHeight = "";
+        string _blockchainHeight = string.Empty;
 
         public string BlockchainHeight
         {
@@ -159,7 +159,7 @@ namespace ElectroneumSpace.Services
             set => SetProperty(ref _blockchainHeight, value);
         }
 
-        string _lastReward = "";
+        string _lastReward = string.Empty;
 
         public string LastReward
         {

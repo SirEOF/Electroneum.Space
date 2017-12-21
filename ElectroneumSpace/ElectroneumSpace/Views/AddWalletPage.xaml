@@ -17,16 +17,16 @@
             <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="GhostWhite" />
 
             <!-- Address -->
-            <Entry x:Name="AddressEntry" Placeholder="Enter your wallet address..." FontSize="Small"
-                   PlaceholderColor="#272B30" TextColor="#272B30" BackgroundColor="GhostWhite">
+            <Entry x:Name="AddressEntry" Placeholder="Enter your wallet address..." Text="{Binding WalletAddress}"
+                   FontSize="Small" PlaceholderColor="#272B30" TextColor="#272B30" BackgroundColor="GhostWhite">
                 <Entry.Effects>
                     <effects:ControlRemoveBackgroundEffect />
                 </Entry.Effects>
             </Entry>
 
             <!-- Nickname -->
-            <Entry x:Name="NicknameEntry" Placeholder="(Optional) Enter a name for your wallet..." FontSize="Small"
-                   PlaceholderColor="#272B30" TextColor="#272B30" BackgroundColor="GhostWhite">
+            <Entry x:Name="NicknameEntry" Placeholder="(Optional) Enter a name for your wallet..." Text="{Binding WalletNickname}"
+                   FontSize="Small" PlaceholderColor="#272B30" TextColor="#272B30" BackgroundColor="GhostWhite">
                 <Entry.Effects>
                     <effects:ControlRemoveBackgroundEffect />
                 </Entry.Effects>
@@ -34,7 +34,7 @@
 
             <!-- Save Button -->
             <Button Text="Save" TextColor="#272B30" HorizontalOptions="Fill" FontSize="Small"
-                    Command="{Binding GoBackCommand}" BackgroundColor="GhostWhite" />
+                    Command="{Binding SaveCommand}" BackgroundColor="GhostWhite" />
 
             <!-- Cancel Button -->
             <Button Text="Cancel" TextColor="#272B30" HorizontalOptions="Fill" FontSize="Small"
