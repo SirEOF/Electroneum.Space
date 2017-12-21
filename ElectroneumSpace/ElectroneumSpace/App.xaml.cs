@@ -1,4 +1,5 @@
 ﻿using ElectroneumSpace.Services;
+using ElectroneumSpace.Utilities;
 using ElectroneumSpace.Views;
 
 using Microsoft.Practices.Unity;
@@ -26,6 +27,9 @@ namespace ElectroneumSpace
         protected override async void OnInitialized()
         {
             InitializeComponent();
+
+            // Bind current thread as main thread
+            ThreadUtils.Setup();
 
             await NavigationService.NavigateAsync("MainPage");
         }

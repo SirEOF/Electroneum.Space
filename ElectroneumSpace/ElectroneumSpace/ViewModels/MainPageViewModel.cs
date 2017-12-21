@@ -1,5 +1,6 @@
 ﻿using ElectroneumSpace.Constants;
 using ElectroneumSpace.Services;
+using ElectroneumSpace.Views;
 
 using Prism.Navigation;
 using Prism.Commands;
@@ -55,6 +56,14 @@ namespace ElectroneumSpace.ViewModels
             set => SetProperty(ref _displaySettingsCommand, value);
         }
 
+        DelegateCommand _addNewWalletCommand;
+
+        public DelegateCommand AddNewWalletCommand
+        {
+            get => _addNewWalletCommand;
+            set => SetProperty(ref _addNewWalletCommand, value);
+        }
+
         #region Support Properties
 
         string _donationAddress = PoolConstants.DonationAddress;
@@ -93,6 +102,7 @@ namespace ElectroneumSpace.ViewModels
             SwapHomeSectionCommand = new DelegateCommand<string>(HandleHomeSectionSwapRequest);
             DisplaySettingsCommand = new DelegateCommand(HandleDisplaySettingsRequest);
             DonationAddressChangeCommand = new DelegateCommand<Entry>(HandleDonationAddressChange);
+            AddNewWalletCommand = new DelegateCommand(() => NavigationService.NavigateAsync($"{nameof(AddWalletPage)}"));
         }
 
         /// <summary>

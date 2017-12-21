@@ -1,8 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:effects="clr-namespace:ElectroneumSpace.Effects"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding Title}"
+             BackgroundColor="#272B30"
              x:Class="ElectroneumSpace.Views.AddWalletPage">
-  
+
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+
+            <Label Text="Add new wallet" TextColor="GhostWhite" FontSize="Medium" FontAttributes="Bold"
+                   HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+
+            <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="GhostWhite" />
+
+            <!-- Address -->
+            <Entry x:Name="AddressEntry" Placeholder="Enter your wallet address..." FontSize="Small"
+                   PlaceholderColor="#272B30" TextColor="#272B30" BackgroundColor="GhostWhite">
+                <Entry.Effects>
+                    <effects:ControlRemoveBackgroundEffect />
+                </Entry.Effects>
+            </Entry>
+
+            <!-- Nickname -->
+            <Entry x:Name="NicknameEntry" Placeholder="(Optional) Enter a name for your wallet..." FontSize="Small"
+                   PlaceholderColor="#272B30" TextColor="#272B30" BackgroundColor="GhostWhite">
+                <Entry.Effects>
+                    <effects:ControlRemoveBackgroundEffect />
+                </Entry.Effects>
+            </Entry>
+
+            <!-- Save Button -->
+            <Button Text="Save" TextColor="#272B30" HorizontalOptions="Fill" FontSize="Small"
+                    Command="{Binding GoBackCommand}" BackgroundColor="GhostWhite" />
+
+            <!-- Cancel Button -->
+            <Button Text="Cancel" TextColor="#272B30" HorizontalOptions="Fill" FontSize="Small"
+                    Command="{Binding GoBackCommand}" BackgroundColor="GhostWhite" />
+
+        </StackLayout>
+    </ContentPage.Content>
+    
 </ContentPage>
