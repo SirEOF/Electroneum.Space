@@ -9,6 +9,7 @@ using Refit;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,7 +35,7 @@ namespace ElectroneumSpace.Services
 
     public class PoolService : BindableBase, IPoolService
     {
-
+        
         IPoolApi PoolApi { get; set; }
 
         ILoggerFacade LoggerFacade { get; set; }
@@ -165,6 +166,18 @@ namespace ElectroneumSpace.Services
         {
             get => _lastReward;
             set => SetProperty(ref _lastReward, value);
+        }
+
+        #endregion
+
+        #region Wallet Metrics
+
+        IQueryable<Wallet> _wallets;
+
+        public IQueryable<Wallet> Wallets
+        {
+            get => _wallets;
+            set => SetProperty(ref _wallets, value);
         }
 
         #endregion

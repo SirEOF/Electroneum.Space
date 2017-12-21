@@ -6,6 +6,7 @@
              xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              xmlns:effects="clr-namespace:ElectroneumSpace.Effects"
              xmlns:selectors="clr-namespace:ElectroneumSpace.Selectors"
+             xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              x:Class="ElectroneumSpace.Views.MainPage"
              BackgroundColor="#272B30"
              Title="{Binding Title}">
@@ -447,6 +448,18 @@
                                         </Button.FontFamily>
                                     </Button>
                                 </Grid>
+
+                                <!-- Wallets -->
+                                <listview:SfListView ItemSize="50" Orientation="Vertical" DragStartMode="OnHold"
+                                                     ItemsSource="{Binding BindingContext.TestData, Source={x:Reference MainContainer}}">
+                                    <listview:SfListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalOptions="Fill" HeightRequest="50" WidthRequest="50" BackgroundColor="Pink">
+                                                <Label Text="Testing" Grid.Row="0" Grid.Column="0" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </listview:SfListView.ItemTemplate>
+                                </listview:SfListView>
 
                                 <!-- Footer -->
                                 <Label Text="No wallets are currently configured."

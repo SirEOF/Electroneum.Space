@@ -1,5 +1,5 @@
 ﻿using CarouselView.FormsPlugin.UWP;
-
+using Syncfusion.ListView.XForms.UWP;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -49,7 +49,8 @@ namespace ElectroneumSpace.UWP
                 
                 List<Assembly> assembliesToInclude = new List<Assembly>
                 {
-                    typeof(CarouselViewRenderer).GetTypeInfo().Assembly
+                    typeof(CarouselViewRenderer).GetTypeInfo().Assembly,
+                    typeof(SfListViewRenderer).GetTypeInfo().Assembly
                 };
 
                 Xamarin.Forms.Forms.Init(e, assembliesToInclude);

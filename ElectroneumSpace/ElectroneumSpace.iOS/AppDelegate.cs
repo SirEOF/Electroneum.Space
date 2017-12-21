@@ -3,6 +3,7 @@ using UIKit;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 using CarouselView.FormsPlugin.iOS;
+using Syncfusion.ListView.XForms.iOS;
 
 namespace ElectroneumSpace.iOS
 {
@@ -21,9 +22,11 @@ namespace ElectroneumSpace.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            CarouselViewRenderer.Init();
-
             global::Xamarin.Forms.Forms.Init();
+
+            CarouselViewRenderer.Init();
+            SfListViewRenderer.Init();
+
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

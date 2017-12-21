@@ -1,9 +1,8 @@
-﻿using Realms;
-using System;
+﻿using System;
 
 namespace ElectroneumSpace.Models
 {
-    public class Wallet : RealmObject
+    public class Wallet
     {
 
         public string Nickname { get; set; }

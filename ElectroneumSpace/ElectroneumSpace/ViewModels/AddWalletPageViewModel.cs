@@ -1,7 +1,5 @@
-﻿using System;
-using ElectroneumSpace.Models;
-using ElectroneumSpace.Services;
-using ElectroneumSpace.Utilities;
+﻿using ElectroneumSpace.Services;
+
 using Prism.Commands;
 using Prism.Logging;
 using Prism.Navigation;
@@ -63,6 +61,7 @@ namespace ElectroneumSpace.ViewModels
         public AddWalletPageViewModel(INavigationService navigationService, ILoggerFacade loggerFacade, IPageDialogService pageDialogService,
             IPoolService poolService) : base(navigationService, loggerFacade)
         {
+            PageDialogService = pageDialogService;
             PoolService = poolService;
 
             ConfigureViewModel();
@@ -82,9 +81,6 @@ namespace ElectroneumSpace.ViewModels
             // Log
             LoggerFacade.Log("Attempting to add a new wallet.", Category.Info, Priority.Medium);
 
-            // Get the realm
-            var realm = RealmUtils.LocalRealm;
-
             // Validate (must start with etn and be 98 characters long)
             if (!WalletAddress.StartsWith("etn") || WalletAddress.Length != 98)
             {
@@ -94,15 +90,7 @@ namespace ElectroneumSpace.ViewModels
             }
 
             // Save
-            realm.Write(() =>
-            {
-                realm.Add(new Wallet()
-                {
-                    Address = WalletAddress,
-                    Nickname = WalletNickname,
-                    Created = DateTime.Now
-                });
-            });
+            // TODO
 
             // Exit
             LoggerFacade.Log("New wallet saved successfully.", Category.Info, Priority.Medium);
