@@ -151,6 +151,22 @@ namespace ElectroneumSpace.Services
             set => SetProperty(ref _networkDifficulty, value);
         }
 
+        string _blockchainHeight = "";
+
+        public string BlockchainHeight
+        {
+            get => _blockchainHeight;
+            set => SetProperty(ref _blockchainHeight, value);
+        }
+
+        string _lastReward = "";
+
+        public string LastReward
+        {
+            get => _lastReward;
+            set => SetProperty(ref _lastReward, value);
+        }
+
         #endregion
 
         public PoolService(ILoggerFacade loggerFacade, IPageDialogService pageDialogService)
@@ -226,6 +242,8 @@ namespace ElectroneumSpace.Services
                 SetNetworkHashRate(stats.Network.Difficulty);
                 SetNetworkLastBlockFound(stats.Network.Timestamp);
                 SetNetworkDifficulty(stats.Network.Difficulty);
+                SetBlockchainHeight(stats.Network.Height);
+                SetLastReward(stats.Network.Reward);
 
                 // Set
                 PoolStatistics = stats;
@@ -237,6 +255,24 @@ namespace ElectroneumSpace.Services
             {
                 IsRefreshing = false;
             }
+        }
+
+        void SetLastReward(long reward)
+        {
+            // Log
+            LoggerFacade.Log("Setting last reward.", Category.Debug, Priority.Low);
+
+            // Set
+            LastReward = reward.ToString();
+        }
+
+        void SetBlockchainHeight(long height)
+        {
+            // Log
+            LoggerFacade.Log("Setting blockchain height.", Category.Debug, Priority.Low);
+
+            // Set
+            BlockchainHeight = height.ToString();
         }
 
         void SetNetworkDifficulty(double difficulty)

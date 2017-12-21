@@ -36,6 +36,7 @@ namespace ElectroneumSpace
             Container.RegisterType<IPoolService, PoolService>(new ContainerControlledLifetimeManager());
 
             Container.RegisterTypeForNavigation<MainPage>();
+            Container.RegisterTypeForNavigation<AddWalletPage>();
         }
     }
 }

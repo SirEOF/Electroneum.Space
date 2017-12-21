@@ -185,7 +185,7 @@
                                    FontAttributes="Bold" FontSize="Small" />
                         </StackLayout>
 
-                        <!-- Difficulty -->
+                        <!-- Blockchain Height -->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                             <Label Text="" TextColor="GhostWhite" FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                                 <Label.FontFamily>
@@ -198,7 +198,8 @@
                                 </Label.FontFamily>
                             </Label>
                             <Label Text="Blockchain Height:" TextColor="GhostWhite" FontSize="Small" />
-                            <Label Text="72924" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                            <Label Text="{Binding BindingContext.PoolService.BlockchainHeight, Source={x:Reference MainContainer}}" TextColor="GhostWhite"
+                                   FontAttributes="Bold" FontSize="Small" />
                         </StackLayout>
 
                         <!-- Reward -->
@@ -214,7 +215,8 @@
                                 </Label.FontFamily>
                             </Label>
                             <Label Text="Last Reward:" TextColor="GhostWhite" FontSize="Small" />
-                            <Label Text="7480.80 ETN" TextColor="GhostWhite" FontAttributes="Bold" FontSize="Small" />
+                            <Label Text="{Binding BindingContext.PoolService.LastReward, Source={x:Reference MainContainer}}" TextColor="GhostWhite"
+                                   FontAttributes="Bold" FontSize="Small" />
                         </StackLayout>
 
                     </StackLayout>
@@ -260,7 +262,7 @@
                                 <!-- Header -->
                                 <Label Text="Donation Address" TextColor="#2f2f2f" FontSize="Small" FontAttributes="Bold"
                                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
                                 
                                 <!-- Address -->
                                 <Entry x:Name="DonationAddressEntry" BackgroundColor="#272B30" TextColor="GhostWhite" FontSize="Micro"
@@ -279,7 +281,7 @@
                                 <Label Text="Thank you to all donators. If you want your name on this page, then DM Rad on the official discord server with your payment ID."
                                        TextColor="#2f2f2f" FontSize="Micro" FontAttributes="Italic"
                                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
                                 
                             </StackLayout>
                         </Frame>
@@ -291,7 +293,7 @@
                                 <!-- Header -->
                                 <Label Text="App Roadmap" TextColor="#2f2f2f" FontSize="Small" FontAttributes="Bold"
                                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
 
                                 <!-- Grid -->
                                 <Grid BackgroundColor="#272B30" RowSpacing="1" ColumnSpacing="1">
@@ -402,7 +404,7 @@
                                 <Label Text="If you have any more ideas for the app, then DM Rad on the official discord server."
                                        TextColor="#2f2f2f" FontSize="Micro" FontAttributes="Italic"
                                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
                                 
                             </StackLayout>
                         </Frame>
@@ -414,6 +416,45 @@
             <DataTemplate x:Key="SettingsTemplate">
                 <ScrollView Orientation="Vertical">
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15, 15, 15, 15" Spacing="10">
+
+                        <!-- Wallet card -->
+                        <Frame x:Name="WalletCard" BackgroundColor="GhostWhite">
+                            <StackLayout>
+
+                                <!-- Header -->
+                                <Grid>
+                                    <Label Text="Wallets" TextColor="#2f2f2f" FontSize="Small" FontAttributes="Bold"
+                                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0"
+                                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+
+                                    <Button Text="" TextColor="#2f2f2f" FontSize="Medium" BackgroundColor="Transparent"
+                                            BorderColor="Transparent" Grid.Row="0" Grid.Column="0"
+                                            HorizontalOptions="End" VerticalOptions="Center">
+                                        <Button.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <On Platform="Android">0, 5, 0, 0</On>
+                                                <On Platform="Default">0, 0, 0, 0</On>
+                                            </OnPlatform>
+                                        </Button.Margin>
+                                        <Button.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <On Platform="iOS">FontAwesome</On>
+                                                <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                                <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                                <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                            </OnPlatform>
+                                        </Button.FontFamily>
+                                    </Button>
+                                </Grid>
+
+                                <!-- Footer -->
+                                <Label Text="No wallets are currently configured."
+                                       TextColor="#2f2f2f" FontSize="Micro" FontAttributes="Italic"
+                                       HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                                
+                            </StackLayout>
+                        </Frame>
 
                     </StackLayout>
                 </ScrollView>
