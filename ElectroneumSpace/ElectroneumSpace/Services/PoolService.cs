@@ -5,6 +5,7 @@ using Prism.Commands;
 using Prism.Logging;
 using Prism.Mvvm;
 using Prism.Services;
+using Realms;
 using Refit;
 
 using System;
@@ -31,6 +32,8 @@ namespace ElectroneumSpace.Services
         string NetworkAddress { get; }
 
         string GetReadableHashRateString(double hashRate);
+
+        void NotifyWalletUpdate();
     }
 
     public class PoolService : BindableBase, IPoolService
@@ -172,9 +175,9 @@ namespace ElectroneumSpace.Services
 
         #region Wallet Metrics
 
-        IQueryable<Wallet> _wallets;
+        IRealmCollection<Wallet> _wallets;
 
-        public IQueryable<Wallet> Wallets
+        public IRealmCollection<Wallet> Wallets
         {
             get => _wallets;
             set => SetProperty(ref _wallets, value);
@@ -191,6 +194,10 @@ namespace ElectroneumSpace.Services
             // Setup
             LoggerFacade.Log($"Starting Service: {nameof(PoolService)}.", Category.Debug, Priority.Low);
 
+            // Get Database Objects
+            var realm = RealmUtils.LocalRealm;
+            Wallets = realm.All<Wallet>().AsRealmCollection();
+
             // Commands
             RefreshPoolDataCommand = new DelegateCommand(() => UpdatePoolStatisticsAsync(true).ConfigureAwait(false), () => !IsRefreshing).ObservesProperty(() => IsRefreshing);
 
@@ -202,6 +209,11 @@ namespace ElectroneumSpace.Services
             });
 
             UpdatePoolStatisticsAsync().ConfigureAwait(false);
+        }
+
+        public void NotifyWalletUpdate()
+        {
+            RaisePropertyChanged(nameof(Wallets));
         }
 
         public string GetReadableHashRateString(double hashRate)
@@ -270,10 +282,13 @@ namespace ElectroneumSpace.Services
             }
         }
 
-        void SetLastReward(long reward)
+        void SetLastReward(double reward)
         {
             // Log
             LoggerFacade.Log("Setting last reward.", Category.Debug, Priority.Low);
+
+            // Calculate
+            reward = reward / 100;
 
             // Set
             LastReward = reward.ToString();

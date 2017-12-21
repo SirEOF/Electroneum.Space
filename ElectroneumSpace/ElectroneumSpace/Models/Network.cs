@@ -15,7 +15,7 @@ namespace ElectroneumSpace.Models
         public long Timestamp { get; set; }
 
         [JsonProperty("reward")]
-        public long Reward { get; set; }
+        public double Reward { get; set; }
 
         [JsonProperty("hash")]
         public string Hash { get; set; }

@@ -1,9 +1,11 @@
-﻿using ElectroneumSpace.Services;
-
+﻿using ElectroneumSpace.Models;
+using ElectroneumSpace.Services;
+using ElectroneumSpace.Utilities;
 using Prism.Commands;
 using Prism.Logging;
 using Prism.Navigation;
 using Prism.Services;
+using System;
 
 namespace ElectroneumSpace.ViewModels
 {
@@ -24,6 +26,14 @@ namespace ElectroneumSpace.ViewModels
         {
             get => _pageDialogService;
             set => SetProperty(ref _pageDialogService, value);
+        }
+
+        bool _isSaving;
+
+        public bool IsSaving
+        {
+            get => _isSaving;
+            set => SetProperty(ref _isSaving, value);
         }
 
         string _walletAddress = string.Empty;
@@ -73,28 +83,46 @@ namespace ElectroneumSpace.ViewModels
 
             Title = "Add wallet";
             GoBackCommand = new DelegateCommand(() => NavigationService.GoBackAsync());
-            SaveCommand = new DelegateCommand(HandleSaveRequest);
+            SaveCommand = new DelegateCommand(HandleSaveRequest, () => !IsSaving).ObservesProperty(() => IsSaving);
         }
 
         void HandleSaveRequest()
         {
-            // Log
-            LoggerFacade.Log("Attempting to add a new wallet.", Category.Info, Priority.Medium);
-
-            // Validate (must start with etn and be 98 characters long)
-            if (!WalletAddress.StartsWith("etn") || WalletAddress.Length != 98)
+            try
             {
-                LoggerFacade.Log("Wallet validation failed.", Category.Exception, Priority.Medium);
-                PageDialogService.DisplayAlertAsync("Error", "Your address is invalid, please ensure it is correct and try again.", "Ok");
-                return;
+                // Log
+                IsSaving = true;
+                LoggerFacade.Log("Attempting to add a new wallet.", Category.Info, Priority.Medium);
+
+                // Validate (must start with etn and be 98 characters long)
+                if (!WalletAddress.StartsWith("etn") || WalletAddress.Length != 98)
+                {
+                    LoggerFacade.Log("Wallet validation failed.", Category.Exception, Priority.Medium);
+                    PageDialogService.DisplayAlertAsync("Error", "Your address is invalid, please ensure it is correct and try again.", "Ok");
+                    return;
+                }
+
+                // Save
+                var realm = RealmUtils.LocalRealm;
+                realm.Write(() =>
+                {
+                    realm.Add(new Wallet()
+                    {
+                        Address = WalletAddress,
+                        Nickname = WalletNickname,
+                        Created = DateTime.Now
+                    });
+                });
+
+                // Exit
+                LoggerFacade.Log("New wallet saved successfully.", Category.Info, Priority.Medium);
+                NavigationService.GoBackAsync();
             }
-
-            // Save
-            // TODO
-
-            // Exit
-            LoggerFacade.Log("New wallet saved successfully.", Category.Info, Priority.Medium);
-            NavigationService.GoBackAsync();
+            finally
+            {
+                PoolService.NotifyWalletUpdate();
+                IsSaving = false;
+            }
         }
 
         public override void OnNavigatedTo(NavigationParameters parameters)

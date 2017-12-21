@@ -418,57 +418,60 @@
                 <ScrollView Orientation="Vertical">
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15, 15, 15, 15" Spacing="10">
 
-                        <!-- Wallet card -->
-                        <Frame x:Name="WalletCard" BackgroundColor="GhostWhite">
-                            <StackLayout>
+                        <!-- Header -->
+                        <Grid BackgroundColor="GhostWhite" HorizontalOptions="FillAndExpand" Padding="15, 15, 15, 15">
 
-                                <!-- Header -->
-                                <Grid>
-                                    <Label Text="Wallets" TextColor="#2f2f2f" FontSize="Small" FontAttributes="Bold"
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Text="Wallets" TextColor="#2f2f2f" FontSize="Small" FontAttributes="Bold"
                                            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0"
                                            HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
 
-                                    <Button Text="" TextColor="#2f2f2f" FontSize="Medium" BackgroundColor="Transparent"
+                            <Button Text="" TextColor="#2f2f2f" FontSize="Medium" BackgroundColor="Transparent"
                                             Command="{Binding BindingContext.AddNewWalletCommand, Source={x:Reference MainContainer}}"
                                             BorderColor="Transparent" Grid.Row="0" Grid.Column="0"
                                             HorizontalOptions="End" VerticalOptions="Center">
-                                        <Button.Margin>
-                                            <OnPlatform x:TypeArguments="Thickness">
-                                                <On Platform="Android">0, 5, 0, 0</On>
-                                                <On Platform="Default">0, 0, 0, 0</On>
-                                            </OnPlatform>
-                                        </Button.Margin>
-                                        <Button.FontFamily>
-                                            <OnPlatform x:TypeArguments="x:String">
-                                                <On Platform="iOS">FontAwesome</On>
-                                                <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
-                                                <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
-                                                <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
-                                            </OnPlatform>
-                                        </Button.FontFamily>
-                                    </Button>
-                                </Grid>
+                                <Button.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="Android">0, 5, 0, 0</On>
+                                        <On Platform="Default">0, 0, 0, 0</On>
+                                    </OnPlatform>
+                                </Button.Margin>
+                                <Button.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">FontAwesome</On>
+                                        <On Platform="Android">fontawesome-webfont.ttf#FontAwesome</On>
+                                        <On Platform="UWP">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                        <On Platform="Default">Assets/Fonts/fontawesome-webfont.ttf#FontAwesome</On>
+                                    </OnPlatform>
+                                </Button.FontFamily>
+                            </Button>
 
-                                <!-- Wallets -->
-                                <listview:SfListView ItemSize="50" Orientation="Vertical" DragStartMode="OnHold"
-                                                     ItemsSource="{Binding BindingContext.TestData, Source={x:Reference MainContainer}}">
-                                    <listview:SfListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid HorizontalOptions="Fill" HeightRequest="50" WidthRequest="50" BackgroundColor="Pink">
-                                                <Label Text="Testing" Grid.Row="0" Grid.Column="0" />
-                                            </Grid>
-                                        </DataTemplate>
-                                    </listview:SfListView.ItemTemplate>
-                                </listview:SfListView>
+                            <!-- No wallet label -->
+                            <Label Text="No wallets are currently configured." Grid.Row="1" Grid.Column="0"
+                                   IsVisible="{Binding BindingContext.PoolService.Wallets, Converter={StaticResource EmptyListVisibilityConverter}, Source={x:Reference MainContainer}}"
+                                   TextColor="#2f2f2f" FontSize="Micro" FontAttributes="Italic"
+                                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                   HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                        </Grid>
 
-                                <!-- Footer -->
-                                <Label Text="No wallets are currently configured."
-                                       TextColor="#2f2f2f" FontSize="Micro" FontAttributes="Italic"
-                                       HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
-                                
-                            </StackLayout>
-                        </Frame>
+                        <!-- Wallets -->
+                        <listview:SfListView Orientation="Vertical" DragStartMode="OnHold" AutoFitMode="Height"
+                                             ItemsSource="{Binding BindingContext.PoolService.Wallets, Source={x:Reference MainContainer}}">
+                            <listview:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid BackgroundColor="GhostWhite" Padding="15, 15, 15, 15">
+                                        <Label Text="New Wallet" TextColor="#2f2f2f" FontSize="Small" FontAttributes="Bold"
+                                               HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"
+                                               VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"
+                                               Grid.Row="0" Grid.Column="0" />
+                                    </Grid>
+                                </DataTemplate>
+                            </listview:SfListView.ItemTemplate>
+                        </listview:SfListView>
 
                     </StackLayout>
                 </ScrollView>
@@ -482,6 +485,7 @@
                                            SettingsTemplate="{StaticResource SettingsTemplate}" />
 
             <converters:HomeSectionConverter x:Key="HomeSectionConverter" />
+            <converters:EmptyListVisibilityConverter x:Key="EmptyListVisibilityConverter" />
 
         </ResourceDictionary>
     </ContentPage.Resources>
