@@ -28,6 +28,8 @@ namespace ElectroneumSpace.Services
         bool IsRefreshing { get; }
 
         string NetworkAddress { get; }
+
+        string GetReadableHashRateString(double hashRate);
     }
 
     public class PoolService : BindableBase, IPoolService
@@ -133,6 +135,22 @@ namespace ElectroneumSpace.Services
             set => SetProperty(ref _networkHashRate, value);
         }
 
+        string _networkLastBlockFound = "";
+
+        public string NetworkLastBlockFound
+        {
+            get => _networkLastBlockFound;
+            set => SetProperty(ref _networkLastBlockFound, value);
+        }
+
+        string _networkDifficulty = "";
+
+        public string NetworkDifficulty
+        {
+            get => _networkDifficulty;
+            set => SetProperty(ref _networkDifficulty, value);
+        }
+
         #endregion
 
         public PoolService(ILoggerFacade loggerFacade, IPageDialogService pageDialogService)
@@ -145,10 +163,10 @@ namespace ElectroneumSpace.Services
             LoggerFacade.Log($"Starting Service: {nameof(PoolService)}.", Category.Debug, Priority.Low);
 
             // Commands
-            RefreshPoolDataCommand = new DelegateCommand(HandlePoolDataRefreshRequest, () => !IsRefreshing).ObservesProperty(() => IsRefreshing);
+            RefreshPoolDataCommand = new DelegateCommand(() => UpdatePoolStatisticsAsync(true).ConfigureAwait(false), () => !IsRefreshing).ObservesProperty(() => IsRefreshing);
 
             // Start background tasks
-            Device.StartTimer(TimeSpan.FromHours(1), () => 
+            Device.StartTimer(TimeSpan.FromSeconds(30), () => 
             {
                 UpdatePoolStatisticsAsync().ConfigureAwait(false);
                 return true;
@@ -157,9 +175,18 @@ namespace ElectroneumSpace.Services
             UpdatePoolStatisticsAsync().ConfigureAwait(false);
         }
 
-        void HandlePoolDataRefreshRequest()
+        public string GetReadableHashRateString(double hashRate)
         {
-            UpdatePoolStatisticsAsync(true).ConfigureAwait(false);
+            var i = 0;
+            var byteUnits = new string[] { "H", "KH", "MH", "GH", "TH", "PH" };
+            
+            while (hashRate > 1000)
+            {
+                hashRate = hashRate / 1000;
+                i++;
+            }
+
+            return $"{hashRate.ToString("F")} {byteUnits[i]}/sec";
         }
 
         async Task<bool> UpdatePoolStatisticsAsync(bool displayErrors = false)
@@ -196,6 +223,9 @@ namespace ElectroneumSpace.Services
                 SetPoolBlockEstimate(stats.Pool.Blocks);
 
                 // Set network settings
+                SetNetworkHashRate(stats.Network.Difficulty);
+                SetNetworkLastBlockFound(stats.Network.Timestamp);
+                SetNetworkDifficulty(stats.Network.Difficulty);
 
                 // Set
                 PoolStatistics = stats;
@@ -209,17 +239,47 @@ namespace ElectroneumSpace.Services
             }
         }
 
-        void SetNetworkHashRate(string hash)
+        void SetNetworkDifficulty(double difficulty)
+        {
+            // Log
+            LoggerFacade.Log("Setting network difficulty.", Category.Debug, Priority.Low);
+
+            // Set
+            NetworkDifficulty = difficulty.ToString();
+        }
+
+        void SetNetworkLastBlockFound(long timestamp)
+        {
+            // Log
+            LoggerFacade.Log("Setting network last block found.", Category.Debug, Priority.Low);
+
+            // Get Current Time
+            var blockDateTime = DateUtils.GetDateTimeFromUnixTimestamp(timestamp);
+
+            // Calculate Minutes
+            var minuteDifference = (DateTime.UtcNow - blockDateTime).TotalMinutes;
+            var minuteFloor = (int)Math.Floor(minuteDifference);
+
+            // Set
+            NetworkLastBlockFound = minuteFloor.ToString();
+        }
+
+        void SetNetworkHashRate(double difficulty)
         {
             // Log
             LoggerFacade.Log("Setting network hashrate.", Category.Debug, Priority.Low);
 
-            // Calculate
-            //var toMh = hash / 1000000;
-            //var toStr = toMh.ToString("F");
+            // Set
+            NetworkHashRate = GetReadableHashRateString(difficulty / 60);
+        }
+
+        void SetPoolHashRate(double hashrate)
+        {
+            // Log
+            LoggerFacade.Log("Setting pool hashrate.", Category.Debug, Priority.Low);
 
             // Set
-            //PoolHashRate = toStr;
+            PoolHashRate = GetReadableHashRateString(hashrate);
         }
 
         void SetPoolBlockEstimate(string[] blocks)
@@ -300,19 +360,6 @@ namespace ElectroneumSpace.Services
 
             // Set
             PoolLastBlockFound = minuteFloor.ToString();
-        }
-
-        void SetPoolHashRate(double hashrate)
-        {
-            // Log
-            LoggerFacade.Log("Setting pool hashrate.", Category.Debug, Priority.Low);
-
-            // Calculate
-            var toMh = hashrate / 1000000;
-            var toStr = toMh.ToString("F");
-
-            // Set
-            PoolHashRate = toStr;
         }
     }
 }

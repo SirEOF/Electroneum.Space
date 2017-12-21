@@ -6,7 +6,7 @@ namespace ElectroneumSpace.Models
     public partial class Network
     {
         [JsonProperty("difficulty")]
-        public long Difficulty { get; set; }
+        public double Difficulty { get; set; }
 
         [JsonProperty("height")]
         public long Height { get; set; }

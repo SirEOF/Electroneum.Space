@@ -7,7 +7,13 @@ namespace ElectroneumSpace.Utilities
     public static class DateUtils
     {
 
-        public static DateTime GetDateTimeFromUnixTimestamp(long unixTimestamp) => new DateTime(1970, 1, 1).AddMilliseconds(unixTimestamp);
+        public static DateTime GetDateTimeFromUnixTimestamp(long unixTimestamp)
+        {
+            // Make assumptions on unix epoch from ms to s (introduce year 2400 Y2K bug)
+            if (unixTimestamp <= 10000000000)
+                return new DateTime(1970, 1, 1).AddSeconds(unixTimestamp);
+            return new DateTime(1970, 1, 1).AddMilliseconds(unixTimestamp);
+        }
 
         public static TimeSpan GetAverageIntervalFromCollectionOfTimestamps(IList<DateTime> timestamps)
         {
