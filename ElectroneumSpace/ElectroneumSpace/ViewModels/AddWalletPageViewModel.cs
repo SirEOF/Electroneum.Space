@@ -6,6 +6,7 @@ using Prism.Logging;
 using Prism.Navigation;
 using Prism.Services;
 using System;
+using System.Linq;
 
 namespace ElectroneumSpace.ViewModels
 {
@@ -93,6 +94,14 @@ namespace ElectroneumSpace.ViewModels
                 // Log
                 IsSaving = true;
                 LoggerFacade.Log("Attempting to add a new wallet.", Category.Info, Priority.Medium);
+
+                // Validate (must not already exist)
+                if (PoolService.Wallets.Any((wallet) => wallet.Address.Equals(WalletAddress)))
+                {
+                    LoggerFacade.Log("Wallet validation failed.", Category.Exception, Priority.Medium);
+                    PageDialogService.DisplayAlertAsync("Error", "This address is already in use.", "Ok");
+                    return;
+                }
 
                 // Validate (must start with etn and be 98 characters long)
                 if (!WalletAddress.StartsWith("etn") || WalletAddress.Length != 98)

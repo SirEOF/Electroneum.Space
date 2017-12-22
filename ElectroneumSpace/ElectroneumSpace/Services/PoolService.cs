@@ -10,8 +10,6 @@ using Refit;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -30,6 +28,8 @@ namespace ElectroneumSpace.Services
         bool IsRefreshing { get; }
 
         string NetworkAddress { get; }
+
+        IRealmCollection<Wallet> Wallets { get; }
 
         string GetReadableHashRateString(double hashRate);
 
