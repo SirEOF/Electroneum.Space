@@ -1,4 +1,5 @@
-﻿using ElectroneumSpace.Models;
+﻿using ElectroneumSpace.Constants;
+using ElectroneumSpace.Models;
 using ElectroneumSpace.Utilities;
 using Plugin.Connectivity;
 using Prism.Commands;
@@ -19,7 +20,7 @@ namespace ElectroneumSpace.Services
 
     public interface IPoolApi
     {
-        [Get("/stats/nonBrowser")]
+        [Get("/poolStats")]
         Task<PoolStats> GetPoolStatisticsAsync();
     }
 
@@ -189,7 +190,7 @@ namespace ElectroneumSpace.Services
         {
             LoggerFacade = loggerFacade;
             PageDialogService = pageDialogService;
-            PoolApi = RestService.For<IPoolApi>("http://api.electroneum.space/v1");
+            PoolApi = RestService.For<IPoolApi>(PoolConstants.PoolBaseUri);
 
             // Setup
             LoggerFacade.Log($"Starting Service: {nameof(PoolService)}.", Category.Debug, Priority.Low);
@@ -245,7 +246,7 @@ namespace ElectroneumSpace.Services
             try
             {
                 LoggerFacade.Log("Attempting to update pool statistics.", Category.Debug, Priority.Low);
-
+                
                 var stats = await PoolApi.GetPoolStatisticsAsync().ConfigureAwait(true);
 
                 // Some stats are wrong or not included, for this we parse the webpage
@@ -274,6 +275,12 @@ namespace ElectroneumSpace.Services
                 PoolStatistics = stats;
 
                 return true;
+            }
+
+            catch (Exception e)
+            {
+                LoggerFacade.Log("An error occured getting stats from the server.", Category.Exception, Priority.Medium);
+                return false;
             }
 
             finally
